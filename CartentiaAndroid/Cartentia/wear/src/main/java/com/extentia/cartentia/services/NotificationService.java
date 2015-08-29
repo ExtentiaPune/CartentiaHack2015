@@ -6,7 +6,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import com.extentia.cartentia.Constants;
+import com.extentia.cartentia.common.Constants;
 import com.extentia.cartentia.R;
 import com.extentia.cartentia.views.activities.DashboardWearActivity;
 import com.google.android.gms.wearable.DataEvent;
