@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.extentia.cartentia.R;
 import com.extentia.cartentia.common.CustomProgressDialog;
+import com.extentia.cartentia.common.PreferenceManager;
 import com.extentia.cartentia.presenter.LoginPresenter;
 import com.extentia.cartentia.view.interfaces.LoginView;
 
@@ -25,6 +26,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!TextUtils.isEmpty(PreferenceManager.getUserID())) {
+            navigateToDashBoardActivity();
+            return;
+        }
         setContentView(R.layout.activity_login);
         initPresenter();
         initView();

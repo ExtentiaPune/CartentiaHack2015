@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:layout_marginTop="30dp" />
 
     <TextView
@@ -17,7 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/productImage"
         android:layout_marginTop="19dp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textSize="19sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

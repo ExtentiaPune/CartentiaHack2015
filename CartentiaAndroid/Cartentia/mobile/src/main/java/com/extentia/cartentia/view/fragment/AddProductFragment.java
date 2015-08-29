@@ -1,6 +1,7 @@
 package com.extentia.cartentia.view.fragment;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -49,7 +50,7 @@ public class AddProductFragment extends Fragment implements AddProductView {
         initView();
     }
 
-    public AddProductFragment getInstance(String productId) {
+    public static AddProductFragment getInstance(String productId) {
         Bundle bundle = new Bundle();
         bundle.putString("productId", productId);
         AddProductFragment addProductFragment = new AddProductFragment();
@@ -61,10 +62,16 @@ public class AddProductFragment extends Fragment implements AddProductView {
         addProductPresenter = new AddProductPresenter(this);
         context = getActivity();
         viewcartButton = (Button) rootView.findViewById(R.id.viewcartBtn);
+        viewcartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         addCartTextView = (TextView) rootView.findViewById(R.id.addedCartTextView);
         productImage = (ImageView) rootView.findViewById(R.id.productImage);
         suggestionProductList = (HorizontalListView) rootView.findViewById(R.id.suggestionProductListView);
-        CustomProgressDialog.startProgressDialog(context);
+        CustomProgressDialog.startProgressDialog(getActivity());
         addProductPresenter.fetchProduct(getArguments().getString("productId"));
     }
 
@@ -73,7 +80,7 @@ public class AddProductFragment extends Fragment implements AddProductView {
         if (product != null) {
             Picasso.with(getActivity()).load(Constants.Url.IMAGE_HOST_URL + product.getProductImage()).into(productImage);
             SpannableString spannablecontent = new SpannableString(product.getProductName() + " has been added to your cart successfully");
-            spannablecontent.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC),
+            spannablecontent.setSpan(new StyleSpan(Typeface.BOLD),
                     0, product.getProductName().length(), 0);
             addCartTextView.setText(spannablecontent);
         }
