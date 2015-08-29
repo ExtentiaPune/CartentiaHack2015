@@ -11,4 +11,15 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+    <string name="username_txt">Username</string>
+    <string name="password_txt">Password</string>
+    <string name="login_btn_txt">Login</string>
+    <string name="empty_username_txt">Please enter username</string>
+    <string name="empty_password_txt">Please enter password</string>
+    <string name="nfc_disabled_txt">NFC is disabled.</string>
+    <string name="nfc_feature_not_supported_txt">This device doesn\'t support NFC.</string>
+    <string name="my_cart_txt">My Cart</string>
+    <string name="order_history_txt">Order History</string>
+    <string name="about_us_txt">About Us</string>
+    <string name="forgot_password_txt">FORGOT PASSWORD?</string>
 </resources>
