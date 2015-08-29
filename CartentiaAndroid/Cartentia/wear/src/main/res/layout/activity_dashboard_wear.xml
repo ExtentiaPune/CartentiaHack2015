@@ -7,6 +7,6 @@
               tools:context=".DashboardWearActivity"
               tools:deviceIds="wear">
 
-    
+
 
 </LinearLayout>
