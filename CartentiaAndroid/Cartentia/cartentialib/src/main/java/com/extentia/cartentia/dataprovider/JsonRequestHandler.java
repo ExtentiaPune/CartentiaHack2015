@@ -1,6 +1,7 @@
 package com.extentia.cartentia.dataprovider;
 
 import android.text.TextUtils;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;

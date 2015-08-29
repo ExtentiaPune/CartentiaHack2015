@@ -13,8 +13,17 @@ public class LoginResponse {
     private String name;
     private String username;
     private String password;
-    private String role;
     private String groupID;
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    private Role role;
 
     public String getPassword() {
         return password;
@@ -56,13 +65,6 @@ public class LoginResponse {
         this.username = username;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getGroupID() {
         return groupID;
