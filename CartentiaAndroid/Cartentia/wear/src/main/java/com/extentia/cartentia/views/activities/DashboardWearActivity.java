@@ -1,8 +1,8 @@
-package com.extentia.cartentia;
+package com.extentia.cartentia.views.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.TextView;
+import com.extentia.cartentia.R;
 
 
 public class DashboardWearActivity extends Activity {
@@ -10,6 +10,6 @@ public class DashboardWearActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard_wear);
+        setContentView(R.layout.activity_wear);
     }
 }

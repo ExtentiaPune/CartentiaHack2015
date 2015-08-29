@@ -1,8 +1,10 @@
-package com.extentia.cartentia;
+package com.extentia.cartentia.views.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import com.extentia.cartentia.R;
+import com.extentia.cartentia.receivers.CartentiaNotificationReceiver;
 
 
 /**
