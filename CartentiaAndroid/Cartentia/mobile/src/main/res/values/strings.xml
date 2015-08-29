@@ -22,4 +22,6 @@
     <string name="order_history_txt">Order History</string>
     <string name="about_us_txt">About Us</string>
     <string name="forgot_password_txt">FORGOT PASSWORD?</string>
+    <string name="login_success_txt">Login succussfully!</string>
+    <string name="login_failed_txt">Login failed!</string>
 </resources>
