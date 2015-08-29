@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.wearable.view.FragmentGridPagerAdapter;
+
 import com.extentia.cartentia.R;
 import com.extentia.cartentia.models.ProductPage;
 import com.extentia.cartentia.models.ProductRow;
