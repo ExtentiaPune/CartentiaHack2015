@@ -24,4 +24,6 @@
     <string name="forgot_password_txt">FORGOT PASSWORD?</string>
     <string name="login_success_txt">Login succussfully!</string>
     <string name="login_failed_txt">Login failed!</string>
+    <string name="you_may_also_like_txt">You may also like</string>
+    <string name="view_cart_txt">VIEW CART</string>
 </resources>

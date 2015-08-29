@@ -1,4 +1,4 @@
-package com.extentia.cartentia.view.interfaces;
+package com.extentia.cartentia.presenter;
 
 /**
  * Created by Abhijeet.Bhosale on 8/29/2015.

@@ -2,5 +2,6 @@
 <resources>
     <color name="toolbar">#00596F</color>
     <color name="statusbar">#004455</color>
+    <color name="viewcart_btn">#D2FF1A</color>
 
 </resources>
