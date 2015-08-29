@@ -26,7 +26,7 @@ public class VolleyManager {
         return requestQueue;
     }
 
-    private <T> void addRequestToQueue(Request<T> request, String requestTag) {
+    public <T> void addRequestToQueue(Request<T> request, String requestTag) {
         if (requestTag != null)
             request.setTag(requestTag);
         requestQueue.add(request);
