@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>title1</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+	<link href="css/styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="wrapper">
+<!--header-->
+<header>
+	<!--navigation-->
+	<nav>
+		<div class="logo">
+			<img src="images/Cartentia.png" alt="Cartentia Logo" />
+		</div>
+		<ul class="navbar">
+			<li><a href="/dashboard" class="active">My Orders</a></li>
+			<li><a href="#" onclick="showfullmap();>all orders on Map</a></li>
+			<li><a href="#">Manage Users</a></li>
+			<li><img src="images/img1.png" alt="user image" /></li>
+		</ul>
+	</nav>
+	<!--navigation finish-->	
+</header>
+<!--header finish-->
+
+<!--content-->
+<div class="sidebar">	
+	<select class="dropdown" id="orderStatus">
+		<option value="">Undelivered</option>			
+	</select>
+	<div  class="orderparent">
+		<ul>
+			<li><a class="orderlist"  href="#" id="" class="active">Order 01</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="content">
+	<div id="orderdetails">
+		<div class="productinfo">
+			Order Placed By  <span>John Smith    |</span>   Total Products  <span>08    |</span>  Total Order Cost <span> Rs. 1000</span>
+			<a href="#"><img id="" src="images/mapicon.png" alt="map icon" class="showonmap iconmap"/></a>
+		</div>
+		<!--products-->
+		<div class="h_strip">
+			<div class="box">
+				<img src="images/pro5.png" alt="product image" />
+				<h3 class="productname">Prod 01</h3>
+				<p>
+					Rate: 50/kg   |   Qty: 3 <br>
+					<span>Prize: Rs. 150</span>
+				</p>
+			</div>
+		</div>
+		<!--products finish-->
+		<div class="h_strip buttondiv">
+			<button id="" class="button black rejectorder">Reject</button>
+			<button id="" class="button purple deliverorder">Deliver</button>
+		</div>
+	</div>
+	<!--small div for map-->
+	<div id="map" class="smallmap"></div>
+	<!--small div for map finish-->
+</div>
+<!--content finish-->
+
+<!--full screen div for map-->
+<div id="fullmap" class="fullmap">
+</div>
+<!--full screen div for map finish-->
+</div><!--wrapper finish-->
+</body>
+</html>
