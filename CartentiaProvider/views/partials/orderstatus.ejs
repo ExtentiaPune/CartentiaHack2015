@@ -1,0 +1,5 @@
+<select class="dropdown" id="orderStatus">
+	<% for(var i = 0; i < data.length; i++){ %>
+		<option value="<%= data[i]._id %>" <% if(data[i].status == 'Pending'){ %> selected <% } %>><%= data[i].status %></option>
+	<% } %>
+</select>
