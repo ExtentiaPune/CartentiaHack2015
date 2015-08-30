@@ -18,6 +18,8 @@ public class Constants {
         public static final String GET_ORDER_HISTORY_URL = HOST_URL + "orders?userID=%s&statusID=%s";
         public static final String GET_MY_CART = HOST_URL + "cart?userID=%s&populate=productID";
         public static final String PLACE_ORDER = HOST_URL + "placeorder";
+        public static final String ADD_CART = "http://121.243.26.108:8001/cart";
+
     }
 
 }
