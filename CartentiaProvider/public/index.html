@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -15,5 +15,40 @@
 		<input type="password" name="password" placeholder="Password" value="" />
 		<input type="submit" value="Login" />
 	</form>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cartentia - Login</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="wrapper">
+	<div>
+		<img src="images/banner.png" alt="Cartentia Logo" />
+	</div>
+	<div style="text-align:center; width: 100%; font-size: 30px; font-color: #363636; padding-top: 30px; padding-bottom: 40px">
+		Welcome to Cartentia
+	</div>
+	<div style="text-align: center;">
+		<form action='/validateuser' method='post'>
+			<p style="padding-bottom: 10px">
+				<input style="height: 46px; width: 362px; padding-left: 10px;"  type="text" name="username" placeholder="Username" value="abdi" /></p>
+			<P style="padding-bottom: 30px">
+				<input  style="height: 46px; width: 362px; padding-left: 10px;" type="password" name="password" placeholder="Password" value="admin123" /></P>
+			<input type="image" class="subbtn" value="LOGIN" />
+		</form>
+	</div>
+
+</div><!--wrapper finish-->
 </body>
 </html>

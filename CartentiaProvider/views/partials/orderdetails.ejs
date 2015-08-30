@@ -1,5 +1,5 @@
 <div class="productinfo">
-	Order Placed By  <span> <%= data[0].orderID.userID.name %>   |</span>   Total Products  <span><%= data.length %>    |</span>  Total Order Cost <span> Rs. 1000</span>
+	Order Placed By  <span> <%= data[0].orderID.userID.name %>   |</span>   Total Products  <span><%= data.length %>  
 	<a href="#"><img id="<%= data[0].orderID.loclatlong %>" src="images/mapicon.png" alt="map icon" class="showonmap iconmap"/></a>
 </div>
 <!--products-->
@@ -10,7 +10,7 @@
 			<h3 class="productname"><%= data[i].productID.productName %></h3>
 			<p>
 				Rate: <%= data[i].productID.price %>   |   Qty: <%= data[i].productID.defaultQty %> <br>
-				<span>Prize: Rs. <%= data[i].productID.price * data[i].productID.defaultQty %></span>
+				<span>Prize: Rs. <%= data[i].productID.price * data[i].productID.defaultQty.match(/\d+/)[0] %></span>
 			</p>
 		</div>
 	<% } %>
@@ -18,7 +18,7 @@
 <!--products finish-->
 <% if(data[0].orderID.statusID.status == 'Pending') { %>
 	<div class="h_strip buttondiv">
-		<button id="" class="button black rejectorder">Reject</button>
-		<button id="" class="button purple deliverorder">Deliver</button>
+		<button data-pending="<%= data[0].orderID.statusID._id %>" id="<%= data[0].orderID._id %>" class="button black rejectorder">Reject</button>
+		<button data-pending="<%= data[0].orderID.statusID._id %>" id="<%= data[0].orderID._id %>" class="button purple deliverorder">Deliver</button>
 	</div>
 <% } %>

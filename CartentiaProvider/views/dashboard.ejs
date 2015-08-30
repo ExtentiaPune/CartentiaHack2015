@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>title1</title>
+    <title>Cartentia - Dashboard</title>
 	<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
 	<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'> -->
 	<link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -15,6 +15,7 @@
 	<script type="text/javascript" src="js/dashboardController.js"></script>
 	<script type="text/javascript" src="js/dashboard.js"></script>
 	<script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap"></script>
+	<script src="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -28,7 +29,7 @@
 		<ul class="navbar">
 			<li><a href="/dashboard" class="active">My Orders</a></li>
 			<li><a href="#" onclick="showfullmap();">all orders on Map</a></li>
-			<li><a href="#">Manage Users</a></li>
+			<!-- <li><a href="#">Manage Users</a></li> -->
 			<li><img src="images/img1.png" alt="user image" /></li>
 		</ul>
 	</nav>
@@ -48,6 +49,9 @@
 	<div id="map" class="smallmap"></div>
 	<!--small div for map finish-->
 </div>
+
+<!--full screen div for map-->
+<div id="fullmap" class="fullmap">
 
 </body>
 </html>

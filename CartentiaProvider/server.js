@@ -5,6 +5,8 @@ var mongoose = restful.mongoose;
 var bodyParser = require('body-parser');
 var seeder = require('./helper/Seeder.js');
 var path = require('path');
+var gcm = require('node-gcm');
+var message = new gcm.Message();
 
 
 mongoose.connect('mongodb://localhost/cartentia');
@@ -12,8 +14,6 @@ mongoose.connect('mongodb://localhost/cartentia');
 mongoose.connection.on('open', function(){
 	seeder.PopulateDB;
 });
-
-
 
 // Models
 var adminModel = require('./model/administrator');
@@ -28,6 +28,7 @@ var cartModel = require('./model/cart');
 
 // Controllers
 var orderDetailsControllerObj = require('./controllers/orderdetailcontroller').OrderDetailsController;
+var orderControllerObj = require('./controllers/ordercontroller').OrderController;
 
 // Create Methods
 userModel.methods(['get', 'post', 'delete']);
@@ -36,7 +37,7 @@ roleModel.methods(['get', 'post', 'delete']);
 statusModel.methods(['get', 'post', 'delete']);
 orderModel.methods(['get', 'post', 'delete']);
 productModel.methods(['get', 'post', 'delete']);
-cartModel.methods(['get', 'post', 'delete']);
+cartModel.methods(['get', 'delete']);
 orderDetailModel.methods(['get', 'post', 'delete']);
 
 // Register APIs
@@ -82,11 +83,84 @@ app.get('/fetchstatuses', function(req, res){
 	statusModel.find({}, function(err, statuses){
 		res.render('partials/orderstatus', {data: statuses});
 	});
-})
+});
+
+app.get('/fetchlatlngs', function(req, res){
+	orderControllerObj.fetchOrderLocations().done(function(locations){
+		res.send(locations);
+	});
+});
+
+app.post('/rejectorder', function(req, res){
+	orderControllerObj.rejectOrder(req.body.id).done(function(result){
+		res.send(result);
+	});
+});
+
+app.post('/deliverorder', function(req, res){
+	orderControllerObj.deliverOrder(req.body.id).done(function(result){
+		message.addData('Order Status', 'Your order will be delivered shortly. Thanks for shopping at Cartentia.');
+
+		var regIds = ['dlVRGVKpJNA:APA91bGnVh1YA3hVagBgh0U5JQgjnlZc2Jy-Ip8WC3G_x7j6KNuBe8Q8GA8o0nTmMWZ27WCwU4jXidi5qIoYS3Owi8R2sdq2C7K1Ii11ljTdkQkzPmYsCwze0qoygO3lkP6Om1GtJEuQ'];
+
+		// Set up the sender with you API key
+		var sender = new gcm.Sender('AIzaSyB6s0Tqe7jPhF17rgkj_td8e0uKjeRVC-8');
+
+		//Now the sender can be used to send messages
+		sender.send(message, regIds, function (err, result) {
+		    if(err) console.error(err);
+		});
+		res.send(result);
+	});
+});
+
+app.post('/cart', function(req, res){
+console.log(req.body);
+	var cartModelObj = new cartModel(req.body);
+
+	cartModelObj.save(function(err, cart){
+		if(err) res.send(err);
+		else res.send(cart);
+	});
+});
+
+app.post('/placeorder', function(req, res){
+	orderModel.findOne({ }, {ID: 1}).sort('-ID').exec(function (err, member) {
+
+    var idVal = member.ID + 1;
+	console.log(idVal);
+	var odrObj = {
+		ID: idVal,
+		date: new Date().toDateString(),
+		userID: req.body.userID,
+		statusID: req.body.statusID,
+		groupID: req.body.groupID,
+		loclatlong: req.body.loclatlong		
+	};
+	var orderModelObj = new orderModel(odrObj);
+	orderModelObj.save(function(err, order){
+		var counter = 1;
+		for(var i = 0; i < req.body.products.length; i++){
+			var obj = req.body.products[i];
+			obj.orderID = order._id;
+			var odrDetailsObj = new orderDetailModel(obj);
+			odrDetailsObj.save(function(err, det){
+				counter++;
+				if(counter == req.body.products.length){
+					console.log('in delete...');
+					cartModel.find({}).remove().exec(function(err, resp){
+						res.sendStatus(200);
+					});
+				}
+			});
+		};
+	});
+  });
+});
 
 app.get('/dashboard', function(req, res){
 	res.render('dashboard');
 });
 
-app.listen(4001);
-console.log('Server listening at port 4001');
+app.listen(8001);
+console.log('Server listening at port 8001');
