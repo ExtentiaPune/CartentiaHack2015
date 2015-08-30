@@ -13,6 +13,16 @@ public class Product {
     private String productCategory;
     private String defaultQty;
     private String price;
+    private int quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
 
     public String get_id() {
         return _id;
