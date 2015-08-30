@@ -49,11 +49,11 @@ public class ProductsPagerAdapter extends FragmentGridPagerAdapter {
         return fragment;
     }
 
-    @Override
-    public Drawable getBackgroundForPage(int row, int col) {
-        ProductPage page = (pages.get(row)).getPages(col);
-        return mContext.getResources().getDrawable(android.R.color.transparent);
-    }
+//    @Override
+//    public Drawable getBackgroundForPage(int row, int col) {
+//        ProductPage page = (pages.get(row)).getPages(col);
+//        return mContext.getResources().getDrawable(android.R.color.transparent);
+//    }
 
     @Override
     public int getRowCount() {
