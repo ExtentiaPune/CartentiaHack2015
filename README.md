@@ -7,16 +7,17 @@ About CARTENTIA ?
 
 
 
-Technical things:
+Technologies Stack:
 - Android (Mobiles & Wears)
 - MEAN STACK
 
 # Source :
+- [MindMap](https://github.com/ExtentiaPune/CartentiaHack2015/tree/master/MindMap)
+
 - [Android Mobile App](https://github.com/ExtentiaPune/CartentiaHack2015/tree/master/CartentiaAndroid/Cartentia/mobile)
   
 - [Android Wear App](https://github.com/ExtentiaPune/CartentiaHack2015/tree/master/CartentiaAndroid/Cartentia/wear)
-- [Design Data](https://github.com/ExtentiaPune/CartentiaHack2015/tree/master/Graphics)
-- 
 
+- [Design Data](https://github.com/ExtentiaPune/CartentiaHack2015/tree/master/Graphics)
 
 
