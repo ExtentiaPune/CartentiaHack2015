@@ -8,7 +8,6 @@ import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.UnsupportedEncodingException;
@@ -20,25 +19,24 @@ public class JsonRequestHandler<T> extends Request<T> {
 
     private Response.Listener successListener;
     private Response.ErrorListener errorListener;
-    private Class<T> requestClass;
+    private String jsonRequest;
     private Class<T> responseClass;
 
     private static final String CHARSET = "utf-8";
 
 
-    public JsonRequestHandler(int methodType, String url, Class<T> requestClass, Class<T> responseClass, Response.Listener<T> successListener, Response.ErrorListener errorListener) {
+    public JsonRequestHandler(int methodType, String url, String jsonRequest, Class<T> responseClass, Response.Listener<T> successListener, Response.ErrorListener errorListener) {
         super(methodType, url, errorListener);
         this.successListener = successListener;
         this.errorListener = errorListener;
-        this.requestClass = requestClass;
+        this.jsonRequest = jsonRequest;
         this.responseClass = responseClass;
 
     }
 
     @Override
     public byte[] getBody() throws AuthFailureError {
-        if (requestClass != null) {
-            String jsonRequest = new Gson().toJson(requestClass);
+        if (jsonRequest != null) {
             try {
                 return jsonRequest.getBytes(CHARSET);
             } catch (UnsupportedEncodingException e) {

@@ -23,9 +23,20 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.extentia.cartentia.CartentiaApplication;
 import com.extentia.cartentia.R;
+import com.extentia.cartentia.common.Constants;
 import com.extentia.cartentia.common.PreferenceManager;
+import com.extentia.cartentia.dataprovider.JsonRequestHandler;
+import com.extentia.cartentia.dataprovider.VolleyManager;
+import com.extentia.cartentia.models.AddCartRequest;
+import com.extentia.cartentia.models.AddMyCartResponse;
 import com.extentia.cartentia.view.fragment.AddProductFragment;
+import com.extentia.cartentia.view.fragment.MyCartFragment;
+import com.google.gson.Gson;
 
 /**
  * Created by Abhijeet.Bhosale on 8/29/2015.
@@ -65,7 +76,7 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
-    private void setTitle(String title) {
+    public void setTitle(String title) {
         ((TextView) toolbar.findViewById(R.id.toolbarTitle)).setText(title);
     }
 
@@ -106,6 +117,8 @@ public class BaseActivity extends AppCompatActivity {
                 menuItem.setChecked(true);
                 switch (menuItem.getItemId()) {
                     case R.id.my_cart:
+
+                        loadMyCartFragment();
                         break;
                     case R.id.order_history:
                         break;
@@ -121,6 +134,16 @@ public class BaseActivity extends AppCompatActivity {
 
         });
         drawerToggle.syncState();
+    }
+
+    public void loadMyCartFragment() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
+        if (!(fragment instanceof MyCartFragment)) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.executePendingTransactions();
+            Fragment addProductFragment = MyCartFragment.getInstance();
+            fragmentManager.beginTransaction().add(R.id.frame, addProductFragment, MyCartFragment.class.getSimpleName()).addToBackStack(null).commit();
+        }
     }
 
     private void logout() {
@@ -215,17 +238,46 @@ public class BaseActivity extends AppCompatActivity {
                 productId = productId != null ? productId.replace("en", "") : "Invalid Product tag";
                 // Toast.makeText(getBaseContext(), body != null ? body.replace("en", "") : "Invalid Product tag", Toast.LENGTH_LONG).show();
                 productId = productId.replace(String.valueOf(productId.charAt(0)), "");
-                loadAddProductFragment(productId);
+                if (!CartentiaApplication.MY_CART_PRODUCTS.contains(productId)) {
+                    addProductToCart(productId);
+                    loadAddProductFragment(productId);
+                } else {
+                    Toast.makeText(getBaseContext(), "Product is already added into your cart", Toast.LENGTH_LONG).show();
+                }
             } else {
                 Toast.makeText(getBaseContext(), " Empty Product tag", Toast.LENGTH_LONG).show();
             }
         }
     }
 
+    private void addProductToCart(String productId) {
+
+        CartentiaApplication.MY_CART_PRODUCTS.add(productId);
+        AddCartRequest addCartRequest = new AddCartRequest();
+        addCartRequest.setUserID(PreferenceManager.getUserID());
+        addCartRequest.setProductID(productId);
+        addCartRequest.setGroupID(PreferenceManager.getGroupID());
+        addCartRequest.setID(1);
+        String jsnRequest = new Gson().toJson(addCartRequest);
+        Request request = new JsonRequestHandler(Request.Method.POST, Constants.Url.ADD_CART, jsnRequest, AddMyCartResponse.class, new Response.Listener<AddMyCartResponse>() {
+            @Override
+            public void onResponse(AddMyCartResponse response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        VolleyManager.getInstance().addRequestToQueue(request, "AddCart");
+    }
+
     private void loadAddProductFragment(String productId) {
         if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
             drawerLayout.closeDrawer(Gravity.LEFT);
         }
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         fragmentManager.executePendingTransactions();

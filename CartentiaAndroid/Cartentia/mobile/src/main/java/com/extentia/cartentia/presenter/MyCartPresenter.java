@@ -1,11 +1,14 @@
 package com.extentia.cartentia.presenter;
 
+import android.widget.Button;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.extentia.cartentia.common.Constants;
 import com.extentia.cartentia.common.PreferenceManager;
 import com.extentia.cartentia.dataprovider.JsonRequestHandler;
+import com.extentia.cartentia.dataprovider.VolleyManager;
 import com.extentia.cartentia.models.MyCartData;
 import com.extentia.cartentia.presenters.BasePresenter;
 import com.extentia.cartentia.view.interfaces.MyCartView;
@@ -16,6 +19,7 @@ import com.extentia.cartentia.view.interfaces.MyCartView;
 public class MyCartPresenter implements BasePresenter {
 
     private MyCartView myCartView;
+
 
     public MyCartPresenter(MyCartView myCartView) {
         this.myCartView = myCartView;
@@ -38,6 +42,7 @@ public class MyCartPresenter implements BasePresenter {
                     myCartView.displayCartError();
             }
         });
+        VolleyManager.getInstance().addRequestToQueue(request,"MyCart");
 
     }
 

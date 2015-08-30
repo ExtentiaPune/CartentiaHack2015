@@ -18,8 +18,10 @@ import android.widget.Toast;
 import com.extentia.cartentia.R;
 import com.extentia.cartentia.common.Constants;
 import com.extentia.cartentia.common.CustomProgressDialog;
+import com.extentia.cartentia.common.PreferenceManager;
 import com.extentia.cartentia.models.Product;
 import com.extentia.cartentia.presenter.AddProductPresenter;
+import com.extentia.cartentia.view.activity.BaseActivity;
 import com.extentia.cartentia.view.interfaces.AddProductView;
 import com.extentia.cartentia.widgets.HorizontalListView;
 import com.squareup.picasso.Picasso;
@@ -59,12 +61,15 @@ public class AddProductFragment extends Fragment implements AddProductView {
     }
 
     private void initView() {
+        ((BaseActivity)getActivity()).setTitle("Added to Cart");
         addProductPresenter = new AddProductPresenter(this);
         context = getActivity();
         viewcartButton = (Button) rootView.findViewById(R.id.viewcartBtn);
         viewcartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((BaseActivity) getActivity()).loadMyCartFragment();
+
 
             }
         });
@@ -78,8 +83,8 @@ public class AddProductFragment extends Fragment implements AddProductView {
     @Override
     public void displayProduct(Product product) {
         if (product != null) {
-            Picasso.with(getActivity()).load(Constants.Url.IMAGE_HOST_URL + product.getProductImage()).into(productImage);
-            SpannableString spannablecontent = new SpannableString(product.getProductName() + " has been added to your cart successfully");
+            Picasso.with(getActivity()).load(Constants.Url.IMAGE_HOST_URL + product.getProductImage().replace("/images", "images/mobile")).into(productImage);
+            SpannableString spannablecontent = new SpannableString(product.getProductName() + " "+getString(R.string.addproduct_txt));
             spannablecontent.setSpan(new StyleSpan(Typeface.BOLD),
                     0, product.getProductName().length(), 0);
             addCartTextView.setText(spannablecontent);

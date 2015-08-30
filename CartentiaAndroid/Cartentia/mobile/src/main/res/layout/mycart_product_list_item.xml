@@ -6,8 +6,9 @@
 
     <ImageView
         android:id="@+id/productImage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginRight="10dp"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
@@ -17,7 +18,6 @@
         android:layout_toRightOf="@+id/productImage"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="Product Name"
         android:textColor="@color/toolbar"
         android:textSize="15sp" />
 
@@ -28,7 +28,6 @@
         android:layout_alignParentRight="true"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="29 Aug"
         android:textColor="@color/toolbar" />
 
     <TextView
@@ -39,8 +38,8 @@
         android:layout_below="@+id/productName"
         android:layout_marginTop="5dp"
         android:ellipsize="end"
-        android:maxLines="2"
-        android:text="The product description goes here" />
+        android:maxLines="2" />
+
     <TextView
         android:id="@+id/productRate"
         android:layout_width="wrap_content"
@@ -49,8 +48,8 @@
         android:layout_below="@+id/productDescription"
         android:layout_marginTop="5dp"
         android:ellipsize="end"
-        android:maxLines="2"
-        android:text="The product description goes here" />
+        android:maxLines="2" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,28 +63,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/productDescription"
-            android:text="Qty: " />
+            android:text="@string/quantity_txt" />
 
         <ImageView
             android:id="@+id/productDecrease"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/sidebar_icn_about" />
+            android:src="@drawable/qty_minus" />
 
         <TextView
             android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/productDescription"
-            android:layout_marginLeft="10dp"
-            android:text="3" />
+            android:layout_marginLeft="10dp" />
 
         <ImageView
             android:id="@+id/productIncrease"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/sidebar_icn_about" />
+            android:src="@drawable/qty_add" />
     </LinearLayout>
 </RelativeLayout>

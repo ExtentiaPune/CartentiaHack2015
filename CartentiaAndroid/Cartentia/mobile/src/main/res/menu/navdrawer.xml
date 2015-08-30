@@ -15,7 +15,7 @@
             android:title="@string/about_us_txt" />
         <item
             android:id="@+id/logout"
-            android:icon="@drawable/sidebar_icn_about"
+            android:icon="@drawable/sidebar_icn_logout"
             android:title="@string/logout_txt" />
     </group>
 </menu>

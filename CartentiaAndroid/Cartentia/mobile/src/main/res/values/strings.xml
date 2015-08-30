@@ -27,4 +27,8 @@
     <string name="login_failed_txt">Login failed!</string>
     <string name="you_may_also_like_txt">You may also like</string>
     <string name="view_cart_txt">VIEW CART</string>
+    <string name="place_order_txt">PLACE ORDER</string>
+    <string name="addproduct_txt"> has been added to your cart successfully</string>
+    <string name="quantity_txt">Qty:   </string>
+    <string name="total_txt">Total:</string>
 </resources>

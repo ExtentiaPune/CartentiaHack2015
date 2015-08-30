@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.extentia.cartentia.R;
 import com.extentia.cartentia.common.Constants;
 import com.extentia.cartentia.models.MyCartResponse;
+import com.extentia.cartentia.models.Product;
+import com.extentia.cartentia.view.fragment.MyCartFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
  */
 public class MyCartProductListAdapter extends RecyclerView.Adapter<MyCartProductListAdapter.ViewHolder> {
 
+    private MyCartFragment myCartFragment;
     private ArrayList<MyCartResponse> myCartRespons;
     private Context context;
 
@@ -63,9 +66,10 @@ public class MyCartProductListAdapter extends RecyclerView.Adapter<MyCartProduct
      *
      * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
      */
-    public MyCartProductListAdapter(Context context, ArrayList<MyCartResponse> dataSet) {
-        myCartRespons = myCartRespons;
+    public MyCartProductListAdapter(Context context, ArrayList<MyCartResponse> myCartRespons, MyCartFragment myCartFragment) {
+        this.myCartRespons = myCartRespons;
         this.context = context;
+        this.myCartFragment = myCartFragment;
     }
 
 
@@ -73,19 +77,57 @@ public class MyCartProductListAdapter extends RecyclerView.Adapter<MyCartProduct
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.mycart_product_list_item, viewGroup, false);
-
         return new ViewHolder(v);
     }
 
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         viewHolder.productName.setText(myCartRespons.get(position).getProductID().getProductName());
         viewHolder.description.setText(myCartRespons.get(position).getProductID().getProductDescription());
-        viewHolder.rate.setText(myCartRespons.get(position).getProductID().getPrice());
-        viewHolder.totalAmt.setText(String.valueOf(Double.valueOf(myCartRespons.get(position).getProductID().getPrice()) * Double.valueOf(myCartRespons.get(position).getProductID().getDefaultQty())));
+        viewHolder.rate.setText("Rate : " + myCartRespons.get(position).getProductID().getPrice() + " Rs.");
+        String numberOnly = myCartRespons.get(position).getProductID().getDefaultQty().replaceAll("[^0-9]", "");
+        viewHolder.totalAmt.setText(String.valueOf(Double.valueOf(myCartRespons.get(position).getProductID().getPrice()) * Double.valueOf(numberOnly)) + " Rs.");
         viewHolder.quantity.setText(myCartRespons.get(position).getProductID().getDefaultQty());
-        Picasso.with(context).load(Constants.Url.IMAGE_HOST_URL + myCartRespons.get(position).getProductID().getProductImage());
+        String[] imageUrl = myCartRespons.get(position).getProductID().getProductImage().split("/");
+        Picasso.with(context).load(Constants.Url.IMAGE_HOST_URL + myCartRespons.get(position).getProductID().getProductImage().replace("/images", "images/mobile")).into(viewHolder.productImage);
+        viewHolder.productDec.setTag(position);
+        viewHolder.productInc.setTag(position);
+        viewHolder.productDec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Product product = myCartRespons.get((Integer) v.getTag()).getProductID();
+                String numberOnly = product.getDefaultQty().toString().replaceAll("[^0-9]", "");
+                int quantity = Integer.valueOf(numberOnly);
+                if (quantity != 0) {
+                    quantity = quantity - 1;
+                }
+                product.setDefaultQty(product.getDefaultQty().replace(numberOnly, "" + quantity));
+                myCartRespons.get((Integer) v.getTag()).setProductID(product);
+                viewHolder.quantity.setText(product.getDefaultQty());
+                viewHolder.totalAmt.setText(String.valueOf(Double.valueOf(myCartRespons.get((Integer) v.getTag()).getProductID().getPrice()) * quantity) + " Rs.");
+                if (myCartFragment != null)
+                    myCartFragment.addProducts(myCartRespons);
+
+            }
+        });
+        viewHolder.productInc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Product product = myCartRespons.get((Integer) v.getTag()).getProductID();
+                String numberOnly = product.getDefaultQty().toString().replaceAll("[^0-9]", "");
+                int quantity = Integer.valueOf(numberOnly);
+                quantity = quantity + 1;
+                product.setDefaultQty(product.getDefaultQty().replace(numberOnly, "" + quantity));
+                myCartRespons.get((Integer) v.getTag()).setProductID(product);
+                viewHolder.quantity.setText(product.getDefaultQty());
+                viewHolder.totalAmt.setText(String.valueOf(Double.valueOf(myCartRespons.get((Integer) v.getTag()).getProductID().getPrice()) * quantity) + " Rs.");
+                if (myCartFragment != null)
+                    myCartFragment.addProducts(myCartRespons);
+            }
+        });
+
     }
 
 
