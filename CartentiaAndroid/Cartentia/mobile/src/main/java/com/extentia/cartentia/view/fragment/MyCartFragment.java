@@ -110,7 +110,7 @@ public class MyCartFragment extends Fragment implements MyCartView,
         PlaceeOrderRequest placeeOrderRequest = new PlaceeOrderRequest();
         placeeOrderRequest.setGroupID(PreferenceManager.getGroupID());
         placeeOrderRequest.setUserID(PreferenceManager.getUserID());
-        placeeOrderRequest.setLoclatlong(context.getString(R.string.default_latlon_txt));
+        placeeOrderRequest.setLoclatlong(lastLocation!=null?""+lastLocation.getLatitude()+","+lastLocation.getLongitude():context.getString(R.string.default_latlon_txt));
         placeeOrderRequest.setStatusID(context.getString(R.string.order_status_txt));
         ArrayList<PlaceProduct> products = new ArrayList<>();
         for (MyCartResponse myCartResponse : cartResponses) {
