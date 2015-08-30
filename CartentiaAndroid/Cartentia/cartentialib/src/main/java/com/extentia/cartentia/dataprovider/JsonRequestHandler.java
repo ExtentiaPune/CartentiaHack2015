@@ -50,6 +50,11 @@ public class JsonRequestHandler<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse networkResponse) {
         try {
             String jsonResponse = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
+            if (jsonResponse != "[]") {
+                jsonResponse = jsonResponse.replace(String.valueOf(jsonResponse.charAt(0)), "");
+                jsonResponse = jsonResponse.replace(String.valueOf(jsonResponse.charAt(jsonResponse.length() - 1)), "");
+
+            }
             T result = new GsonBuilder().create().fromJson(jsonResponse, responseClass);
             return Response.success(result, HttpHeaderParser.parseCacheHeaders(networkResponse));
         } catch (UnsupportedEncodingException e) {

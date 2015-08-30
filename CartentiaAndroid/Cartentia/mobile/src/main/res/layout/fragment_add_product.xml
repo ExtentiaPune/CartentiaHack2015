@@ -1,11 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/productImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/addedCartTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/productImage"
+        android:layout_marginTop="19dp"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addedCartTextView"
+            android:layout_marginTop="19dp"
+            android:padding="@dimen/activity_vertical_margin"
+            android:text="@string/you_may_also_like_txt"
+            android:textColor="@color/toolbar"
+            android:textSize="15sp" />
+
+        <com.extentia.cartentia.widgets.HorizontalListView
+            android:id="@+id/suggestionProductListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addedCartTextView"
+            android:layout_marginTop="11dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/viewcartBtn"
+        android:layout_width="203dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="17dp"
+        android:background="@color/viewcart_btn"
+        android:text="@string/view_cart_txt"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+</RelativeLayout>
