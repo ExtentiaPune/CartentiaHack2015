@@ -27,8 +27,12 @@ public class AddProductPresenter implements BasePresenter {
         Request request = new JsonRequestHandler(Request.Method.GET, url, null, ProductData.class, new Response.Listener<ProductData>() {
             @Override
             public void onResponse(ProductData product) {
-                if (addProductView != null && product != null && product.getData() != null)
+                if (addProductView != null && product != null && product.getData() != null && !product.getData().isEmpty())
                     addProductView.displayProduct(product.getData().get(0));
+                else {
+                    if (addProductView != null)
+                        addProductView.displayNoProductFoundError();
+                }
 
             }
 
