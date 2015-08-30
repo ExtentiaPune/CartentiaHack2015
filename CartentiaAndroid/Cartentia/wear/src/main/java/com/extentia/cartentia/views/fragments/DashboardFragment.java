@@ -56,6 +56,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
     }
 
     private void navigateToOrderHistory() {
+        ((DashboardWearActivity) getActivity()).moveToScreen(new OrderHistoryFragment());
+
     }
 
 }

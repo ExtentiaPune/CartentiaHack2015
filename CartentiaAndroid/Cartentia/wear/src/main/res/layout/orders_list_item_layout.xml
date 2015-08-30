@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+        >
+
+    <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="12dp"
+            >
+        <android.support.wearable.view.CircledImageView
+                android:id="@+id/dateImageView"
+                android:alpha="0.5"
+                android:layout_height="52dp"
+                android:layout_width="52dp"
+                app:circle_border_color="#FFFFFFFF"
+                app:circle_border_width="2dp"
+                app:circle_color="@android:color/holo_blue_dark"/>
+
+        <com.extentia.cartentia.widgets.CartentiaTextView
+                android:id="@+id/dateTextView"
+                android:layout_width="48dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"
+                android:textColor="#d2ff1a"
+                android:layout_height="48dp"
+                android:text="30\nAug"
+                />
+
+    </RelativeLayout>
+
+
+    <com.extentia.cartentia.widgets.CartentiaTextView
+            android:alpha="0.5"
+            android:id="@+id/orderIdTextView"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="72dp"
+            android:layout_height="52dp"
+            android:singleLine="true"
+            android:ellipsize="start"
+            android:textSize="18dp"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:layout_marginRight="10dp"
+            android:text="CRNID007"
+            />
+</merge>
