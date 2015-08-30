@@ -22,4 +22,9 @@ public class Constants {
 
     }
 
+    public static class Keys{
+        public static final String PRODUCTID_KEY = "productId";
+
+    }
+
 }
