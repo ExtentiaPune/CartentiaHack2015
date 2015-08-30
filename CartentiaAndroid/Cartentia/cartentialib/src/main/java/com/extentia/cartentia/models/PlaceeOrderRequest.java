@@ -11,7 +11,7 @@ public class PlaceeOrderRequest {
     private String statusID;
     private String groupID;
     private String loclatlong;
-    private ArrayList<Product> products;
+    private ArrayList<PlaceProduct> products;
 
     public String getGroupID() {
         return groupID;
@@ -45,11 +45,11 @@ public class PlaceeOrderRequest {
         this.loclatlong = loclatlong;
     }
 
-    public ArrayList<Product> getProducts() {
+    public ArrayList<PlaceProduct> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(ArrayList<PlaceProduct> products) {
         this.products = products;
     }
 

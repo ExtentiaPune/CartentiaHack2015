@@ -2,12 +2,11 @@ package com.extentia.cartentia.dataprovider;
 
 import android.text.TextUtils;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonRequest;
 import com.google.gson.GsonBuilder;
 
 import java.io.UnsupportedEncodingException;
@@ -15,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * Created by Abhijeet.Bhosale on 8/29/2015.
  */
-public class JsonRequestHandler<T> extends Request<T> {
+public class JsonPostRequestHandler<T> extends JsonRequest<T> {
 
     private Response.Listener successListener;
     private Response.ErrorListener errorListener;
@@ -25,8 +24,8 @@ public class JsonRequestHandler<T> extends Request<T> {
     private static final String CHARSET = "utf-8";
 
 
-    public JsonRequestHandler(int methodType, String url, String jsonRequest, Class<T> responseClass, Response.Listener<T> successListener, Response.ErrorListener errorListener) {
-        super(methodType, url, errorListener);
+    public JsonPostRequestHandler(int methodType, String url, String jsonRequest, Class<T> responseClass, Response.Listener<T> successListener, Response.ErrorListener errorListener) {
+        super(methodType, url, jsonRequest, successListener, errorListener);
         this.successListener = successListener;
         this.errorListener = errorListener;
         this.jsonRequest = jsonRequest;
@@ -38,18 +37,6 @@ public class JsonRequestHandler<T> extends Request<T> {
     @Override
     public String getPostBodyContentType() {
         return super.getPostBodyContentType();
-    }
-
-    @Override
-    public byte[] getBody() throws AuthFailureError {
-        if (jsonRequest != null) {
-            try {
-                return jsonRequest.getBytes(CHARSET);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        }
-        return super.getBody();
     }
 
     @Override
