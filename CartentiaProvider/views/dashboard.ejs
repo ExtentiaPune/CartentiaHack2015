@@ -7,9 +7,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>title1</title>
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
-	<link href="css/styles.css" rel="stylesheet" type="text/css" />
+	<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'> -->
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="js/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="js/utility/ServiceLayer.js"></script>
+	<script type="text/javascript" src="js/dashboardController.js"></script>
+	<script type="text/javascript" src="js/dashboard.js"></script>
+	<script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -29,5 +34,20 @@
 	</nav>
 	<!--navigation finish-->	
 </header>
+<!--content-->
+<div class="sidebar">
+	<div id="orderstatusparent"></div>
+	<div  class="orderparent">
+		<ul id="orders"></ul>
+	</div>
+</div>
+
+<div class="content">
+	<div id="orderdetails"></div>
+	<!--small div for map-->
+	<div id="map" class="smallmap"></div>
+	<!--small div for map finish-->
+</div>
+
 </body>
 </html>

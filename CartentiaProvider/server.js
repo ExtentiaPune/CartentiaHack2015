@@ -26,6 +26,9 @@ var productModel = require('./model/products');
 var orderDetailModel = require('./model/orderdetails');
 var cartModel = require('./model/cart');
 
+// Controllers
+var orderDetailsControllerObj = require('./controllers/orderdetailcontroller').OrderDetailsController;
+
 // Create Methods
 userModel.methods(['get', 'post', 'delete']);
 groupModel.methods(['get', 'post', 'delete']);
@@ -62,6 +65,24 @@ app.post('/validateuser', function(req, res){
 		}
 	});
 });
+
+app.post('/fetchorderdetails', function(req, res){
+	orderDetailsControllerObj.getDetailsByOrder(req.body.id).done(function(orderdetails){
+		res.render('partials/orderdetails', {data: orderdetails});
+	});
+});
+
+app.post('/fetchordersbystatus', function(req, res){
+	orderModel.find({statusID: req.body.id}, function(err, orders){
+		res.render('partials/order', {data: orders});
+	});
+});
+
+app.get('/fetchstatuses', function(req, res){
+	statusModel.find({}, function(err, statuses){
+		res.render('partials/orderstatus', {data: statuses});
+	});
+})
 
 app.get('/dashboard', function(req, res){
 	res.render('dashboard');
