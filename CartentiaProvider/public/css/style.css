@@ -1,0 +1,47 @@
+/**reset css**/
+a,abbr,acronym,address,applet,article,aside,audio,b
+,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed
+,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,
+ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video
+{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline;box-sizing:border-box;}article,aside,details,figcaption,figure,footer,header,hgroup,menu,
+nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}
+table{border-collapse:collapse;border-spacing:0}
+p, h1, h2, h3, h4{float:left;color:#2f2f2f;width:100%;}
+a{text-decoration:none;color:#2f2f2f;}
+strong{font-weight:600;}
+input, textarea, p, a, div, section{box-sizing:border-box;}
+/**style**/
+body{font-family: 'Open Sans', sans-serif;}
+.wrapper{width:1366px;margin:0px auto;position:relative;}
+nav{background:#0baa78;width:100%;float:left;padding:0px 0px 0px 15px;}
+.logo{float:left;padding:10px 15px;}
+.navbar{float:right;padding:0px 15px;}
+.navbar li{display:inline-block;float:left;line-height:60px;width:228px;text-align:center;}
+.navbar li:last-child{line-height:0px;width:90px;padding:10px 0px 10px 15px;width:auto;}
+.navbar li a{color: #00412c;font-size:18px;font-weight:600;display:block;padding:10px 0px;border-right: 1px solid #147A5A;text-transform:uppercase;}
+.navbar li a:hover{background:#007e56;color:#fff;}
+.navbar > li > .active{background:#007e56;color:#fff;}
+.productinfo{width:100%;float:left;}
+.sidebar{width:20%;float:left;}
+.dropdown{background:#84b14e url('../images/downarrow.png')no-repeat;color:#ffffff;font-size:20px;font-weight:400;padding:20px 15px;width:100%;float:left;-webkit-appearance: none;-moz-appearance: none;appearance: none;background-position: 96% 35px;border:none;}
+.sidebar h2 img{float:right;margin-top:10px;}
+.sidebar ul{width:100%;float:left;}
+.sidebar ul li{width:100%;float:left;border-bottom:1px solid #0baa78;}
+.sidebar ul li a{text-transform:uppercase;font-size:20px;display:block;background-color:#ffffff;text-align:center;padding:20px 0px;font-weight:600;border-right:10px solid #fff;}
+.sidebar ul li a.active, .sidebar ul li a:hover{border-color:#0baa78 !important;color:#0baa78;background:#EFEFEF;transition:all .3s linear;}
+.content{width:80%;float:left;background:url('../images/bg_pattern.png')}
+.productinfo{width:100%;float:left;background:#a9d673;color:#31500d;font-size:16px;font-weight:400;padding:25px 15px;position:relative;}
+.productinfo span{color:  #000000;font-size: 20px;font-weight: 600;}
+.iconmap{position:absolute;top:20px;right:20px;}
+.h_strip{width:100%;float:left;}
+.box{width:20%;float:left;text-align:center;padding-top:30px;}
+.productname{color:#016898;font-size:22px;font-weight:600;padding:15px 0px 10px 0px;}
+.box p{color:  #000000;font-size:16px;font-weight:400;line-height:27px;}
+.box span{color:#000000;font-size:18px;font-weight: 600;}
+.button{width:180px;color:#fff;padding:15px 0px;font-size:16px;font-weight:600;border:none;cursor:pointer;margin-left:20px;text-transform:uppercase;}
+.black{background-color:#1c1c1c;}
+.purple{background-color:  #66316b;}
+.buttondiv{text-align:center;margin:60px 0px 20px 0px;}
+.fullmap{width:100%;position:absolute;left:0%;}
+.smallmap{width:50%;left:25%;}
+select option {background:#fff;color:#000;}
