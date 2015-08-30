@@ -11,7 +11,7 @@ import android.widget.TextView;
  */
 public class CartentiaTextView extends TextView {
 
-    private static final String FONT_NAME = "roboto.ttf";
+    private static final String FONT_NAME = "Roboto-Light.ttf";
 
     public CartentiaTextView(Context context) {
         super(context);

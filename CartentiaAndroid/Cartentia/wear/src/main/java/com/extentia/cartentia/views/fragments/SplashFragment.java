@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.extentia.cartentia.R;
+import com.extentia.cartentia.views.activities.DashboardWearActivity;
 
 /**
  * Created by Extentia on 8/29/2015.
@@ -38,7 +39,7 @@ public class SplashFragment extends Fragment {
     }
 
     private void navigateToDashboard() {
-
+        ((DashboardWearActivity) getActivity()).moveToScreen(new DashboardFragment());
     }
 
 }

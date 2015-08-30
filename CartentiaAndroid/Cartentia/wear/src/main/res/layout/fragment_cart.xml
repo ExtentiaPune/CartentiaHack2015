@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@drawable/bg_cart_screen">
+
+    <com.extentia.cartentia.widgets.CartentiaTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:textSize="12sp"
+            android:text="@string/Rs"/>
+
+    <android.support.wearable.view.GridViewPager
+            android:id="@+id/productPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:keepScreenOn="true"/>
+
+
+    <com.extentia.cartentia.widgets.CartentiaTextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            style="@style/CartButtonsTextStyle"
+            android:text="@string/title_place_order"/>
+
+</LinearLayout>

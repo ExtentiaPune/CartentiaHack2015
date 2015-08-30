@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:gravity="center_horizontal"
+              android:background="@android:color/transparent">
+
+    <ImageView android:layout_width="80dp"
+               android:layout_height="80dp"
+               android:src="@drawable/icn_product_dummy"
+               android:layout_marginTop="10dp"/>
+
+    <com.extentia.cartentia.widgets.CartentiaTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            android:textColor="#64D6F4"
+            android:text="Rate Rs. 30 | Qty : 03"/>
+
+    <com.extentia.cartentia.widgets.CartentiaTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:text="Total : Rs. 90.00"/>
+
+</LinearLayout>
