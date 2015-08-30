@@ -31,7 +31,6 @@ OrderDetailsController.prototype.getDetailsByOrder = function(orderId){
 						}];
 
 						orderdetailModel.populate(order, opts, function(err, odr){
-							console.log(odr);
 							resolve(odr);	
 						});
 					}
