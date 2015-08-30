@@ -41,7 +41,6 @@ public class ProductsPagerAdapter extends FragmentGridPagerAdapter {
 
     @Override
     public Fragment getFragment(int row, int col) {
-
         ProductFragment fragment = new ProductFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("Col", col);

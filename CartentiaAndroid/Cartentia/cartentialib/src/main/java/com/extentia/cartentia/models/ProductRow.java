@@ -17,7 +17,7 @@ public class ProductRow {
         return productPages.get(index);
     }
 
-    public int size(){
+    public int size() {
         return productPages.size();
     }
 }

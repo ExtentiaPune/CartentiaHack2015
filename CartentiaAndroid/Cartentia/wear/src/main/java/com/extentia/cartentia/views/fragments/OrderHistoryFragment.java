@@ -7,6 +7,7 @@ import android.support.wearable.view.WearableListView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import com.extentia.cartentia.R;
 import com.extentia.cartentia.adapters.OrderHistoryAdapter;
 import com.extentia.cartentia.models.OrderHistory;
@@ -25,8 +26,6 @@ public class OrderHistoryFragment extends Fragment implements WearableListView.C
     private static final String PARAM_ORDER_ID = "OrderId";
     private static final String PARAM_IS_FROM_ORDERS = "IsFromOrders";
 
-    private static ArrayList<Integer> listItems;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,32 +41,20 @@ public class OrderHistoryFragment extends Fragment implements WearableListView.C
     }
 
     private void initScreen() {
-        listAdapter = new OrderHistoryAdapter(getActivity(), listItems);
-        orderHistoryList = (WearableListView) rootView.findViewById(R.id.listView1);
-        orderHistoryList.setAdapter(listAdapter);
-        orderHistoryList.setClickListener(OrderHistoryFragment.this);
         orderHistoryPresenter.getOrderHistory();
     }
 
-    static {
-        listItems = new ArrayList<Integer>();
-        listItems.add(R.drawable.icn_dashboard_cart);
-        listItems.add(R.drawable.icn_dashboard_scan);
-        listItems.add(R.drawable.icn_dashboard_history);
-        listItems.add(R.drawable.icn_dashboard_cart);
-        listItems.add(R.drawable.icn_dashboard_history);
-        listItems.add(R.drawable.icn_dashboard_scan);
-        listItems.add(R.drawable.icn_dashboard_cart);
-    }
 
     @Override
     public void onOrderHistoryError() {
-
     }
 
     @Override
-    public void onOrderHistorySuccuss(ArrayList<OrderHistory> orderHistoryList) {
-
+    public void onOrderHistorySuccuss(ArrayList<OrderHistory> dataList) {
+        listAdapter = new OrderHistoryAdapter(getActivity(), dataList);
+        orderHistoryList = (WearableListView) rootView.findViewById(R.id.listView1);
+        orderHistoryList.setAdapter(listAdapter);
+        orderHistoryList.setClickListener(OrderHistoryFragment.this);
     }
 
     @Override

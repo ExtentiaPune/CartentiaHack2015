@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@drawable/bg_main">
+
+    <com.extentia.cartentia.widgets.CartentiaTextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="@string/title_confirmation"
+            style="@style/HeaderTextStyle"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight="1"
+                  android:padding="10dp"
+                  android:orientation="vertical">
+
+        <com.extentia.cartentia.widgets.CartentiaTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:text="Are you sure you want to lace this order?"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="15dp">
+
+            <com.extentia.cartentia.widgets.CartentiaTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:layout_weight="1"
+                    android:text="Total Products"/>
+
+            <com.extentia.cartentia.widgets.CartentiaTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:layout_weight="1"
+                    android:text="Total Price"/>
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal">
+
+            <com.extentia.cartentia.widgets.CartentiaTextView
+                    android:id="@+id/totalProductsTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+                    android:text="13"/>
+
+            <com.extentia.cartentia.widgets.CartentiaTextView
+                    android:id="@+id/totalPriceTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+                    android:text="132"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <com.extentia.cartentia.widgets.CartentiaTextView
+                android:id="@+id/placeOrderCancelTextView"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="25dp"
+                android:text="@android:string/cancel"
+                style="@style/CartButtonsTextStyle"
+                />
+        <com.extentia.cartentia.widgets.CartentiaTextView
+                android:id="@+id/placeOrderOkTextView"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                style="@style/CartButtonsTextStyle"
+                android:text="@android:string/ok"/>
+    </LinearLayout>
+</LinearLayout>

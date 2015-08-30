@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import com.extentia.cartentia.R;
+import com.extentia.cartentia.models.OrderHistory;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Extentia on 8/30/2015.
@@ -17,11 +20,23 @@ import java.util.ArrayList;
 public class OrderHistoryAdapter extends WearableListView.Adapter {
 
     private Context context;
-    private ArrayList<Integer> list;
+    private ArrayList<OrderHistory> list;
 
-    public OrderHistoryAdapter(Context context, ArrayList<Integer> list) {
+    public OrderHistoryAdapter(Context context, ArrayList<OrderHistory> list) {
         this.context = context;
         this.list = list;
+    }
+
+    private String getDate(String date) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd yyyy");
+            Date formattedDate = formatter.parse(date);
+            SimpleDateFormat targetFormat = new SimpleDateFormat("MMM\ndd");
+            return targetFormat.format(formattedDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     @Override
@@ -32,11 +47,10 @@ public class OrderHistoryAdapter extends WearableListView.Adapter {
     @Override
     public void onBindViewHolder(WearableListView.ViewHolder viewHolder, int i) {
         OrderView itemView = (OrderView) viewHolder.itemView;
-
         TextView txtView = (TextView) itemView.findViewById(R.id.orderIdTextView);
-        txtView.setText(String.format("Item %d", i));
-
-        Integer resourceId = list.get(i);
+        txtView.setText(list.get(i).get_id());
+        TextView dateTextView = (TextView) itemView.findViewById(R.id.dateTextView);
+        dateTextView.setText(getDate(list.get(i).getDate()));
         CircledImageView imgView = (CircledImageView) itemView.findViewById(R.id.dateImageView);
         imgView.setImageResource(R.drawable.bg_date_icon);
     }
@@ -46,6 +60,7 @@ public class OrderHistoryAdapter extends WearableListView.Adapter {
         return list.size();
     }
 }
+
 
 class OrderView extends FrameLayout implements WearableListView.Item {
 

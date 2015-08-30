@@ -16,7 +16,8 @@ public class Constants {
         public static final String LOGIN_URL = HOST_URL + "users?username=%s&password=%s&populate=role";
         public static final String GET_PRODUCT_URL = HOST_URL + "products/";
         public static final String GET_ORDER_HISTORY_URL = HOST_URL + "orders?userID=%s&statusID=%s";
-        public static final String GET_MY_CART = "cart?userID=%s&populate=productID";
+        public static final String GET_MY_CART = HOST_URL + "cart?userID=%s&populate=productID";
+        public static final String PLACE_ORDER = HOST_URL + "placeorder";
     }
 
 }

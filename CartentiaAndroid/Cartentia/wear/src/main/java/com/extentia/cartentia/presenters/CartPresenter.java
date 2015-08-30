@@ -1,23 +1,21 @@
-package com.extentia.cartentia.presenter;
+package com.extentia.cartentia.presenters;
 
+import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.extentia.cartentia.common.Constants;
-import com.extentia.cartentia.common.PreferenceManager;
 import com.extentia.cartentia.dataprovider.JsonRequestHandler;
+import com.extentia.cartentia.dataprovider.VolleyManager;
 import com.extentia.cartentia.models.MyCartData;
-import com.extentia.cartentia.presenters.BasePresenter;
-import com.extentia.cartentia.view.interfaces.MyCartView;
+import com.extentia.cartentia.views.interfaces.MyCartView;
 
-/**
- * Created by Abhijeet.Bhosale on 8/30/2015.
- */
-public class MyCartPresenter implements BasePresenter {
+
+public class CartPresenter implements BasePresenter {
 
     private MyCartView myCartView;
 
-    public MyCartPresenter(MyCartView myCartView) {
+    public CartPresenter(MyCartView myCartView) {
         this.myCartView = myCartView;
     }
 
@@ -27,6 +25,7 @@ public class MyCartPresenter implements BasePresenter {
 
             @Override
             public void onResponse(MyCartData response) {
+                Log.d("Cartentia", "API : fetchMyCart " + response);
                 if (myCartView != null)
                     myCartView.displayCart(response.getData());
 
@@ -34,11 +33,13 @@ public class MyCartPresenter implements BasePresenter {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.v("Cartentia", "API : fetchMyCart " + error);
                 if (myCartView != null)
                     myCartView.displayCartError();
             }
         });
 
+        VolleyManager.getInstance().addRequestToQueue(request, "GetCart");
     }
 
 

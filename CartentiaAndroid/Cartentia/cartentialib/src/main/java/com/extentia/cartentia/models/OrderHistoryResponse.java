@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class OrderHistoryResponse {
 
-    private ArrayList data;
+    private ArrayList<OrderHistory> data;
 
     public ArrayList getData() {
         return data;
