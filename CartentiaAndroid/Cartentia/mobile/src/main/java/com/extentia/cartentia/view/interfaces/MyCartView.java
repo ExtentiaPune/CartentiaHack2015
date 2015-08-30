@@ -10,5 +10,11 @@ import java.util.ArrayList;
 public interface MyCartView {
 
     void displayCart(ArrayList<MyCartResponse> cartRespons);
+
     void displayCartError();
+
+    void displayPlaceOrderSuccess();
+
+    void displayPlaceOrderError();
+
 }

@@ -104,6 +104,7 @@ public class MyCartProductListAdapter extends RecyclerView.Adapter<MyCartProduct
                     quantity = quantity - 1;
                 }
                 product.setDefaultQty(product.getDefaultQty().replace(numberOnly, "" + quantity));
+                product.setQuantity(quantity);
                 myCartRespons.get((Integer) v.getTag()).setProductID(product);
                 viewHolder.quantity.setText(product.getDefaultQty());
                 viewHolder.totalAmt.setText(String.valueOf(Double.valueOf(myCartRespons.get((Integer) v.getTag()).getProductID().getPrice()) * quantity) + " Rs.");
@@ -120,6 +121,7 @@ public class MyCartProductListAdapter extends RecyclerView.Adapter<MyCartProduct
                 int quantity = Integer.valueOf(numberOnly);
                 quantity = quantity + 1;
                 product.setDefaultQty(product.getDefaultQty().replace(numberOnly, "" + quantity));
+                product.setQuantity(quantity);
                 myCartRespons.get((Integer) v.getTag()).setProductID(product);
                 viewHolder.quantity.setText(product.getDefaultQty());
                 viewHolder.totalAmt.setText(String.valueOf(Double.valueOf(myCartRespons.get((Integer) v.getTag()).getProductID().getPrice()) * quantity) + " Rs.");

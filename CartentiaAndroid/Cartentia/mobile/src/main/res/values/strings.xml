@@ -31,4 +31,7 @@
     <string name="addproduct_txt"> has been added to your cart successfully</string>
     <string name="quantity_txt">Qty:   </string>
     <string name="total_txt">Total:</string>
+    <string name="empty_cart_txt">\"Your cart is empty! Please add Product.\"</string>
+    <string name="user_role_txt">Primary</string>
+    <string name="gcm_SenderId">104877605106</string>
 </resources>
