@@ -1,4 +1,4 @@
-package com.extentia.cartentia.presenter;
+package com.extentia.cartentia.presenters;
 
 /**
  * Created by Abhijeet.Bhosale on 8/29/2015.

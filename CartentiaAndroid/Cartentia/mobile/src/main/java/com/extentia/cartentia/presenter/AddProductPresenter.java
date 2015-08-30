@@ -6,6 +6,7 @@ import com.android.volley.VolleyError;
 import com.extentia.cartentia.common.Constants;
 import com.extentia.cartentia.dataprovider.JsonRequestHandler;
 import com.extentia.cartentia.models.Product;
+import com.extentia.cartentia.presenters.BasePresenter;
 import com.extentia.cartentia.view.interfaces.AddProductView;
 
 /**

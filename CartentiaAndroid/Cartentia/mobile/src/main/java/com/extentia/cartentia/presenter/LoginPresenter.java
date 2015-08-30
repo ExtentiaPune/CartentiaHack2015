@@ -7,6 +7,7 @@ import com.extentia.cartentia.common.Constants;
 import com.extentia.cartentia.dataprovider.JsonRequestHandler;
 import com.extentia.cartentia.dataprovider.VolleyManager;
 import com.extentia.cartentia.models.LoginResponse;
+import com.extentia.cartentia.presenters.BasePresenter;
 import com.extentia.cartentia.view.interfaces.LoginView;
 
 /**

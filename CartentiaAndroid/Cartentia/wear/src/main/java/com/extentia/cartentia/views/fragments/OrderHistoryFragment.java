@@ -9,16 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.extentia.cartentia.R;
 import com.extentia.cartentia.adapters.OrderHistoryAdapter;
+import com.extentia.cartentia.models.OrderHistory;
+import com.extentia.cartentia.presenters.OrderHistoryPresenter;
 import com.extentia.cartentia.views.activities.DashboardWearActivity;
+import com.extentia.cartentia.views.interfaces.OrderHistoryView;
 
 import java.util.ArrayList;
 
-public class OrderHistoryFragment extends Fragment implements WearableListView.ClickListener {
+public class OrderHistoryFragment extends Fragment implements WearableListView.ClickListener, OrderHistoryView {
 
     private WearableListView orderHistoryList;
     private OrderHistoryAdapter listAdapter;
+    private OrderHistoryPresenter orderHistoryPresenter;
     private View rootView;
     private static final String PARAM_ORDER_ID = "OrderId";
+    private static final String PARAM_IS_FROM_ORDERS = "IsFromOrders";
 
     private static ArrayList<Integer> listItems;
 
@@ -27,8 +32,13 @@ public class OrderHistoryFragment extends Fragment implements WearableListView.C
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_order_history, container, false);
+        initPresenter();
         initScreen();
         return rootView;
+    }
+
+    private void initPresenter() {
+        orderHistoryPresenter = new OrderHistoryPresenter(this);
     }
 
     private void initScreen() {
@@ -36,6 +46,7 @@ public class OrderHistoryFragment extends Fragment implements WearableListView.C
         orderHistoryList = (WearableListView) rootView.findViewById(R.id.listView1);
         orderHistoryList.setAdapter(listAdapter);
         orderHistoryList.setClickListener(OrderHistoryFragment.this);
+        orderHistoryPresenter.getOrderHistory();
     }
 
     static {
@@ -50,6 +61,16 @@ public class OrderHistoryFragment extends Fragment implements WearableListView.C
     }
 
     @Override
+    public void onOrderHistoryError() {
+
+    }
+
+    @Override
+    public void onOrderHistorySuccuss(ArrayList<OrderHistory> orderHistoryList) {
+
+    }
+
+    @Override
     public void onClick(WearableListView.ViewHolder viewHolder) {
         navigateToCart(viewHolder.getPosition() + "");
     }
@@ -58,6 +79,7 @@ public class OrderHistoryFragment extends Fragment implements WearableListView.C
         CartFragment cartFragment = new CartFragment();
         Bundle bundle = new Bundle();
         bundle.putString(PARAM_ORDER_ID, orderId);
+        bundle.putBoolean(PARAM_IS_FROM_ORDERS, true);
         cartFragment.setArguments(bundle);
         ((DashboardWearActivity) getActivity()).moveToScreen(cartFragment);
     }
