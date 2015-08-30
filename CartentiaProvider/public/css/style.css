@@ -43,5 +43,6 @@ nav{background:#0baa78;width:100%;float:left;padding:0px 0px 0px 15px;}
 .purple{background-color:  #66316b;}
 .buttondiv{text-align:center;margin:60px 0px 20px 0px;}
 .fullmap{width:100%;position:absolute;left:0%;}
-.smallmap{width:50%;left:25%;}
+.smallmap{height:500px,width:100%;left:25%;}
+#orders{height: 408px;overflow-y:scroll;display:inline-block;}
 select option {background:#fff;color:#000;}

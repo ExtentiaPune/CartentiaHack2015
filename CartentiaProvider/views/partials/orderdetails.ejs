@@ -1,0 +1,24 @@
+<div class="productinfo">
+	Order Placed By  <span> <%= data[0].orderID.userID.name %>   |</span>   Total Products  <span><%= data.length %>    |</span>  Total Order Cost <span> Rs. 1000</span>
+	<a href="#"><img id="<%= data[0].orderID.loclatlong %>" src="images/mapicon.png" alt="map icon" class="showonmap iconmap"/></a>
+</div>
+<!--products-->
+<div class="h_strip">
+	<% for(var i = 0; i < data.length; i++) { %>
+		<div class="box">
+			<img src="<%= data[i].productID.productImage %>" alt="product image" />
+			<h3 class="productname"><%= data[i].productID.productName %></h3>
+			<p>
+				Rate: <%= data[i].productID.price %>   |   Qty: <%= data[i].productID.defaultQty %> <br>
+				<span>Prize: Rs. <%= data[i].productID.price * data[i].productID.defaultQty %></span>
+			</p>
+		</div>
+	<% } %>
+</div>
+<!--products finish-->
+<% if(data[0].orderID.statusID.status == 'Pending') { %>
+	<div class="h_strip buttondiv">
+		<button id="" class="button black rejectorder">Reject</button>
+		<button id="" class="button purple deliverorder">Deliver</button>
+	</div>
+<% } %>
