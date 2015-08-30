@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.extentia.cartentia.R;
 import com.extentia.cartentia.common.Constants;
 import com.extentia.cartentia.models.MyCartResponse;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Extentia on 8/29/2015.

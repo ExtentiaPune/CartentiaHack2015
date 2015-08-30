@@ -84,13 +84,13 @@ public class MyCartFragment extends Fragment implements MyCartView {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         myCartRecyclerView.setLayoutManager(layoutManager);
         myCartRecyclerView.setAdapter(myCartProductListAdapter);
-        myCartRecyclerView.setItemAnimator(
+        myCartRecyclerView.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(getActivity())
-                        .color(Color.RED)
+                        .color(Color.GRAY)
                         .size(1)
                         .margin(getResources().getDimensionPixelSize(R.dimen.list_leftmargin),
                                 getResources().getDimensionPixelSize(R.dimen.list_rightmargin))
-                        .build())
+                        .build());
         CustomProgressDialog.stopProgressDialog(getActivity());
         addProducts(cartRespons);
     }
