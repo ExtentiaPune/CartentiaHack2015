@@ -5,7 +5,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.extentia.cartentia.common.Constants;
 import com.extentia.cartentia.dataprovider.JsonRequestHandler;
-import com.extentia.cartentia.models.Product;
+import com.extentia.cartentia.dataprovider.VolleyManager;
+import com.extentia.cartentia.models.ProductData;
 import com.extentia.cartentia.presenters.BasePresenter;
 import com.extentia.cartentia.view.interfaces.AddProductView;
 
@@ -23,11 +24,11 @@ public class AddProductPresenter implements BasePresenter {
 
     public void fetchProduct(final String productId) {
         String url = Constants.Url.GET_PRODUCT_URL + productId;
-        Request request = new JsonRequestHandler(Request.Method.GET, url, null, Product.class, new Response.Listener<Product>() {
+        Request request = new JsonRequestHandler(Request.Method.GET, url, null, ProductData.class, new Response.Listener<ProductData>() {
             @Override
-            public void onResponse(Product product) {
-                if (addProductView != null)
-                    addProductView.displayProduct(product);
+            public void onResponse(ProductData product) {
+                if (addProductView != null && product != null && product.getData() != null)
+                    addProductView.displayProduct(product.getData().get(0));
 
             }
 
@@ -38,6 +39,7 @@ public class AddProductPresenter implements BasePresenter {
                     addProductView.displayNoProductFoundError();
             }
         });
+        VolleyManager.getInstance().addRequestToQueue(request, "AddProduct");
     }
 
 

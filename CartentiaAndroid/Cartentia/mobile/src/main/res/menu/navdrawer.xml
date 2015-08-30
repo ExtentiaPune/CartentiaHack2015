@@ -9,11 +9,13 @@
             android:id="@+id/order_history"
             android:icon="@drawable/sidebar_icn_history"
             android:title="@string/order_history_txt" />
-    </group>
-    <group android:checkableBehavior="single">
         <item
             android:id="@+id/about_us"
             android:icon="@drawable/sidebar_icn_about"
             android:title="@string/about_us_txt" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/sidebar_icn_about"
+            android:title="@string/logout_txt" />
     </group>
 </menu>

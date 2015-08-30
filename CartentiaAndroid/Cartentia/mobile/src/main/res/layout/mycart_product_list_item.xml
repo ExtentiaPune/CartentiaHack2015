@@ -22,7 +22,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/totalAmt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -41,12 +41,21 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:text="The product description goes here" />
-
+    <TextView
+        android:id="@+id/productRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/productName"
+        android:layout_below="@+id/productDescription"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="The product description goes here" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/productDescription"
-        android:layout_below="@+id/productDescription"
+        android:layout_below="@+id/productRate"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">

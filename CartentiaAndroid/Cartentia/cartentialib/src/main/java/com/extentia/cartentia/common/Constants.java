@@ -12,10 +12,11 @@ public class Constants {
 
     public static class Url {
         public static final String HOST_URL = "http://121.243.26.108:8001/api/";
-        public static final String IMAGE_HOST_URL="http://121.243.26.108:8001/";
-        public static final String LOGIN_URL = HOST_URL + "users?username=%s&password=%s";
+        public static final String IMAGE_HOST_URL = "http://121.243.26.108:8001/";
+        public static final String LOGIN_URL = HOST_URL + "users?username=%s&password=%s&populate=role";
         public static final String GET_PRODUCT_URL = HOST_URL + "products/";
         public static final String GET_ORDER_HISTORY_URL = HOST_URL + "orders?userID=%s&statusID=%s";
+        public static final String GET_MY_CART = "cart?userID=%s&populate=productID";
     }
 
 }

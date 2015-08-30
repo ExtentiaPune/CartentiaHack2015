@@ -2,6 +2,7 @@ package com.extentia.cartentia;
 
 import android.app.Application;
 
+import com.extentia.cartentia.common.PreferenceManager;
 import com.extentia.cartentia.dataprovider.VolleyManager;
 
 /**
@@ -13,5 +14,6 @@ public class CartentiaApplication extends Application {
     public void onCreate() {
         super.onCreate();
         VolleyManager.getInstance().initRequestQueue(getApplicationContext());
+        PreferenceManager.initPreferenceManager(getApplicationContext());
     }
 }

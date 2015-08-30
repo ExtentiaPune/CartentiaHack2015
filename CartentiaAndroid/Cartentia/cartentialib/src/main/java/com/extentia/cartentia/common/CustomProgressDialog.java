@@ -11,12 +11,10 @@ public class CustomProgressDialog {
     private static ProgressDialog progressDialog;
 
     public static void startProgressDialog(Context context) {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("Please wait");
-            progressDialog.setCancelable(false);
-            progressDialog.setCanceledOnTouchOutside(false);
-        }
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Please wait");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
     }

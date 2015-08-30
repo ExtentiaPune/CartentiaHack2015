@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.extentia.cartentia.R;
+import com.extentia.cartentia.common.PreferenceManager;
+import com.extentia.cartentia.view.fragment.AddProductFragment;
 
 /**
  * Created by Abhijeet.Bhosale on 8/29/2015.
@@ -54,9 +58,15 @@ public class BaseActivity extends AppCompatActivity {
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
         setHomeUpEnabled(false);
 
 
+    }
+
+    private void setTitle(String title) {
+        ((TextView) toolbar.findViewById(R.id.toolbarTitle)).setText(title);
     }
 
     private void initNavDrawer() {
@@ -88,6 +98,7 @@ public class BaseActivity extends AppCompatActivity {
         };
         drawerLayout.setDrawerListener(drawerToggle);
         navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.getMenu().findItem(R.id.my_cart).setTitle("" + PreferenceManager.getName() + "'s Cart");
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -97,16 +108,26 @@ public class BaseActivity extends AppCompatActivity {
                     case R.id.my_cart:
                         break;
                     case R.id.order_history:
-                        // TODO - Do something
                         break;
                     case R.id.about_us:
-                        // TODO - Do something
+                        break;
+                    case R.id.logout:
+                        logout();
                         break;
                 }
                 return true;
             }
+
+
         });
         drawerToggle.syncState();
+    }
+
+    private void logout() {
+        PreferenceManager.setUserID(null);
+        Intent loginIntent = new Intent(this, LoginActivity.class);
+        startActivity(loginIntent);
+        finishAffinity();
     }
 
     private void setHomeUpEnabled(boolean homeUpEnabled) {
@@ -190,14 +211,26 @@ public class BaseActivity extends AppCompatActivity {
                 }
             }
             if (ndefMessages != null && ndefMessages.length > 0) {
-                String body = new String(ndefMessages[0].getRecords()[0].getPayload());
-                body = body != null ? body.replace("en", "") : "Invalid Product tag";
+                String productId = new String(ndefMessages[0].getRecords()[0].getPayload());
+                productId = productId != null ? productId.replace("en", "") : "Invalid Product tag";
                 // Toast.makeText(getBaseContext(), body != null ? body.replace("en", "") : "Invalid Product tag", Toast.LENGTH_LONG).show();
-                ((TextView) findViewById(R.id.productName)).setText(body + " \nis added to your cart.");
+                productId = productId.replace(String.valueOf(productId.charAt(0)), "");
+                loadAddProductFragment(productId);
             } else {
                 Toast.makeText(getBaseContext(), " Empty Product tag", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    private void loadAddProductFragment(String productId) {
+        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        fragmentManager.executePendingTransactions();
+        Fragment addProductFragment = AddProductFragment.getInstance(productId.toString());
+        fragmentManager.beginTransaction().add(R.id.frame, addProductFragment, AddProductFragment.class.getSimpleName()).addToBackStack(null).commit();
     }
 
     @Override
