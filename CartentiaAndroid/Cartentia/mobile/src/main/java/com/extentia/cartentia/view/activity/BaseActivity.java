@@ -30,7 +30,7 @@ import com.extentia.cartentia.CartentiaApplication;
 import com.extentia.cartentia.R;
 import com.extentia.cartentia.common.Constants;
 import com.extentia.cartentia.common.PreferenceManager;
-import com.extentia.cartentia.dataprovider.JsonRequestHandler;
+import com.extentia.cartentia.dataprovider.JsonPostRequestHandler;
 import com.extentia.cartentia.dataprovider.VolleyManager;
 import com.extentia.cartentia.models.AddCartRequest;
 import com.extentia.cartentia.models.AddMyCartResponse;
@@ -140,7 +140,9 @@ public class BaseActivity extends AppCompatActivity {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame);
         if (!(fragment instanceof MyCartFragment)) {
             FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             fragmentManager.executePendingTransactions();
+
             Fragment addProductFragment = MyCartFragment.getInstance();
             fragmentManager.beginTransaction().add(R.id.frame, addProductFragment, MyCartFragment.class.getSimpleName()).addToBackStack(null).commit();
         }
@@ -259,7 +261,7 @@ public class BaseActivity extends AppCompatActivity {
         addCartRequest.setGroupID(PreferenceManager.getGroupID());
         addCartRequest.setID(1);
         String jsnRequest = new Gson().toJson(addCartRequest);
-        Request request = new JsonRequestHandler(Request.Method.POST, Constants.Url.ADD_CART, jsnRequest, AddMyCartResponse.class, new Response.Listener<AddMyCartResponse>() {
+        Request request = new JsonPostRequestHandler(Request.Method.POST, Constants.Url.ADD_CART, jsnRequest, AddMyCartResponse.class, new Response.Listener<AddMyCartResponse>() {
             @Override
             public void onResponse(AddMyCartResponse response) {
 
@@ -278,15 +280,22 @@ public class BaseActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(Gravity.LEFT);
         }
 
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         fragmentManager.executePendingTransactions();
         Fragment addProductFragment = AddProductFragment.getInstance(productId.toString());
-        fragmentManager.beginTransaction().add(R.id.frame, addProductFragment, AddProductFragment.class.getSimpleName()).addToBackStack(null).commit();
+        fragmentManager.beginTransaction().add(R.id.frame, addProductFragment, AddProductFragment.class.getSimpleName()).commit();
     }
 
     @Override
     public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 1) {
+            finish();
+            return;
+        }
+
         if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
             drawerLayout.closeDrawer(Gravity.LEFT);
         } else {

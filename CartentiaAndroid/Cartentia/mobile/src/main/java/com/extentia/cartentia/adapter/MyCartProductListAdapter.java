@@ -85,9 +85,9 @@ public class MyCartProductListAdapter extends RecyclerView.Adapter<MyCartProduct
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         viewHolder.productName.setText(myCartRespons.get(position).getProductID().getProductName());
         viewHolder.description.setText(myCartRespons.get(position).getProductID().getProductDescription());
-        viewHolder.rate.setText("Rate : " + myCartRespons.get(position).getProductID().getPrice() + " Rs.");
+        viewHolder.rate.setText("Rate : " + context.getString(R.string.ruppee_symbol_txt) + " " + myCartRespons.get(position).getProductID().getPrice());
         String numberOnly = myCartRespons.get(position).getProductID().getDefaultQty().replaceAll("[^0-9]", "");
-        viewHolder.totalAmt.setText(String.valueOf(Double.valueOf(myCartRespons.get(position).getProductID().getPrice()) * Double.valueOf(numberOnly)) + " Rs.");
+        viewHolder.totalAmt.setText(context.getString(R.string.ruppee_symbol_txt) + " " + String.valueOf(Double.valueOf(myCartRespons.get(position).getProductID().getPrice()) * Double.valueOf(numberOnly)));
         viewHolder.quantity.setText(myCartRespons.get(position).getProductID().getDefaultQty());
         String[] imageUrl = myCartRespons.get(position).getProductID().getProductImage().split("/");
         Picasso.with(context).load(Constants.Url.IMAGE_HOST_URL + myCartRespons.get(position).getProductID().getProductImage().replace("/images", "images/mobile")).into(viewHolder.productImage);
@@ -107,7 +107,7 @@ public class MyCartProductListAdapter extends RecyclerView.Adapter<MyCartProduct
                 product.setQuantity(quantity);
                 myCartRespons.get((Integer) v.getTag()).setProductID(product);
                 viewHolder.quantity.setText(product.getDefaultQty());
-                viewHolder.totalAmt.setText(String.valueOf(Double.valueOf(myCartRespons.get((Integer) v.getTag()).getProductID().getPrice()) * quantity) + " Rs.");
+                viewHolder.totalAmt.setText(context.getString(R.string.ruppee_symbol_txt) + " " + String.valueOf(Double.valueOf(myCartRespons.get((Integer) v.getTag()).getProductID().getPrice()) * quantity));
                 if (myCartFragment != null)
                     myCartFragment.addProducts(myCartRespons);
 
@@ -124,7 +124,7 @@ public class MyCartProductListAdapter extends RecyclerView.Adapter<MyCartProduct
                 product.setQuantity(quantity);
                 myCartRespons.get((Integer) v.getTag()).setProductID(product);
                 viewHolder.quantity.setText(product.getDefaultQty());
-                viewHolder.totalAmt.setText(String.valueOf(Double.valueOf(myCartRespons.get((Integer) v.getTag()).getProductID().getPrice()) * quantity) + " Rs.");
+                viewHolder.totalAmt.setText(context.getString(R.string.ruppee_symbol_txt) + " " + String.valueOf(Double.valueOf(myCartRespons.get((Integer) v.getTag()).getProductID().getPrice()) * quantity));
                 if (myCartFragment != null)
                     myCartFragment.addProducts(myCartRespons);
             }
@@ -138,4 +138,8 @@ public class MyCartProductListAdapter extends RecyclerView.Adapter<MyCartProduct
         return myCartRespons != null ? myCartRespons.size() : 0;
     }
 
+    public void setMyCartRespons(ArrayList<MyCartResponse> myCartRespons) {
+        this.myCartRespons = myCartRespons;
+        notifyDataSetChanged();
+    }
 }

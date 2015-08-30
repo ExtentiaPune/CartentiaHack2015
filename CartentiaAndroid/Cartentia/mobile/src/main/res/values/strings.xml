@@ -34,4 +34,5 @@
     <string name="empty_cart_txt">\"Your cart is empty! Please add Product.\"</string>
     <string name="user_role_txt">Primary</string>
     <string name="gcm_SenderId">104877605106</string>
+    <string name="ruppee_symbol_txt">\u20B9</string>
 </resources>

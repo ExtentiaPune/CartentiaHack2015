@@ -22,8 +22,8 @@ import com.extentia.cartentia.adapter.MyCartProductListAdapter;
 import com.extentia.cartentia.common.CustomProgressDialog;
 import com.extentia.cartentia.common.PreferenceManager;
 import com.extentia.cartentia.models.MyCartResponse;
+import com.extentia.cartentia.models.PlaceProduct;
 import com.extentia.cartentia.models.PlaceeOrderRequest;
-import com.extentia.cartentia.models.Product;
 import com.extentia.cartentia.presenter.MyCartPresenter;
 import com.extentia.cartentia.view.activity.BaseActivity;
 import com.extentia.cartentia.view.interfaces.MyCartView;
@@ -83,6 +83,7 @@ public class MyCartFragment extends Fragment implements MyCartView,
                 }
             });
         }
+        buildGoogleApiClient();
     }
 
     private void showPlaceOrderConfirmationDialog() {
@@ -109,11 +110,16 @@ public class MyCartFragment extends Fragment implements MyCartView,
         PlaceeOrderRequest placeeOrderRequest = new PlaceeOrderRequest();
         placeeOrderRequest.setGroupID(PreferenceManager.getGroupID());
         placeeOrderRequest.setUserID(PreferenceManager.getUserID());
-        placeeOrderRequest.setLoclatlong("" + lastLocation.getLatitude() + "," + lastLocation.getLongitude());
+        placeeOrderRequest.setLoclatlong("12.973280,77.594982");
         placeeOrderRequest.setStatusID("55e280f3f16422c805aaadb7");
-        ArrayList<Product> products = new ArrayList<>();
+        ArrayList<PlaceProduct> products = new ArrayList<>();
         for (MyCartResponse myCartResponse : cartResponses) {
-            Product product = myCartResponse.getProductID();
+            PlaceProduct product = new PlaceProduct();
+            String numberOnly = myCartResponse.getProductID().getPrice().replaceAll("[^0-9]", "");
+            product.setPrice(Integer.valueOf(numberOnly));
+            String quantity = myCartResponse.getProductID().getDefaultQty().replaceAll("[^0-9]", "");
+            product.setQuantity(Integer.valueOf(quantity));
+            product.setProductID(myCartResponse.getProductID().get_id());
             products.add(product);
         }
         placeeOrderRequest.setProducts(products);
@@ -122,7 +128,7 @@ public class MyCartFragment extends Fragment implements MyCartView,
     }
 
     private void fetchMyCart() {
-        CustomProgressDialog.startProgressDialog(getActivity());
+        CustomProgressDialog.startProgressDialog(context);
         myCartPresenter.fetchMyCart();
     }
 
@@ -130,13 +136,19 @@ public class MyCartFragment extends Fragment implements MyCartView,
 
     @Override
     public void displayCart(ArrayList<MyCartResponse> cartRespons) {
-        this.cartResponses = cartRespons;
-        myCartProductListAdapter = new MyCartProductListAdapter(getActivity(), cartRespons, this);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        myCartRecyclerView.setLayoutManager(layoutManager);
-        myCartRecyclerView.setAdapter(myCartProductListAdapter);
-        CustomProgressDialog.stopProgressDialog(getActivity());
-        addProducts(cartRespons);
+        CustomProgressDialog.stopProgressDialog(context);
+        if (cartRespons != null && !cartRespons.isEmpty()) {
+            this.cartResponses = cartRespons;
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            myCartRecyclerView.setLayoutManager(layoutManager);
+            myCartProductListAdapter = new MyCartProductListAdapter(getActivity(), cartRespons, this);
+            myCartRecyclerView.setAdapter(myCartProductListAdapter);
+
+            addProducts(cartRespons);
+        } else {
+            Toast.makeText(context, "Your cart is not available! Please try later.", Toast.LENGTH_LONG).show();
+            rootView.findViewById(R.id.totalAmt).setVisibility(View.GONE);
+        }
     }
 
 
@@ -162,12 +174,17 @@ public class MyCartFragment extends Fragment implements MyCartView,
 
     @Override
     public void displayPlaceOrderSuccess() {
-
+        CustomProgressDialog.stopProgressDialog(getActivity());
+        Toast.makeText(context, "Your order has been placed successfully and awaiting acceptance.", Toast.LENGTH_LONG).show();
+        myCartProductListAdapter.setMyCartRespons(null);
+        CartentiaApplication.MY_CART_PRODUCTS.clear();
+        //fetchMyCart();
     }
 
     @Override
     public void displayPlaceOrderError() {
-
+        CustomProgressDialog.stopProgressDialog(getActivity());
+        Toast.makeText(context, "Please try later!", Toast.LENGTH_LONG).show();
     }
 
     public static Fragment getInstance() {
@@ -206,4 +223,5 @@ public class MyCartFragment extends Fragment implements MyCartView,
         super.onDestroy();
         myCartPresenter.onDestroy();
     }
+
 }

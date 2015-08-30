@@ -33,7 +33,6 @@ public class LoginPresenter implements BasePresenter {
                     PreferenceManager.setUserID(response.getData().get(0).get_id());
                     PreferenceManager.setUsername(response.getData().get(0).getUsername());
                     PreferenceManager.setRole(response.getData().get(0).getRole().getName());
-
                     loginView.onLoginSuccuss();
                 }
             }

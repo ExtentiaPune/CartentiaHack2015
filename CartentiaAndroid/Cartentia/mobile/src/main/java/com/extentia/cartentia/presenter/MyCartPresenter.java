@@ -4,6 +4,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.extentia.cartentia.common.Constants;
+import com.extentia.cartentia.dataprovider.JsonPostRequestHandler;
 import com.extentia.cartentia.dataprovider.JsonRequestHandler;
 import com.extentia.cartentia.dataprovider.VolleyManager;
 import com.extentia.cartentia.models.MyCartData;
@@ -25,7 +26,7 @@ public class MyCartPresenter implements BasePresenter {
     }
 
     public void fetchMyCart() {
-        String url = String.format(Constants.Url.GET_MY_CART, "55e1a3cfc3d7a2d01b7d44ca");
+        String url = String.format(Constants.Url.GET_MY_CART,"");
         Request request = new JsonRequestHandler(Request.Method.GET, url, null, MyCartData.class, new Response.Listener<MyCartData>() {
 
             @Override
@@ -54,18 +55,18 @@ public class MyCartPresenter implements BasePresenter {
     public void placeOrder(PlaceeOrderRequest placeeOrderRequest) {
         String url = Constants.Url.PLACE_ORDER;
         String jsonRequest = new Gson().toJson(placeeOrderRequest);
-        Request request = new JsonRequestHandler(Request.Method.POST, url, jsonRequest, PlaceeOrderRequest.class, new Response.Listener<PlaceeOrderRequest>() {
+        Request request = new JsonPostRequestHandler(Request.Method.POST, url, jsonRequest, PlaceeOrderRequest.class, new Response.Listener<PlaceeOrderRequest>() {
             @Override
             public void onResponse(PlaceeOrderRequest response) {
                 if (myCartView != null)
-                    myCartView.displayPlaceOrderError();
+                    myCartView.displayPlaceOrderSuccess();
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (myCartView != null)
-                    myCartView.displayCartError();
+                    myCartView.displayPlaceOrderError();
 
             }
         });
