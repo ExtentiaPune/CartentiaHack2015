@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.extentia.cartentia.R;
 import com.extentia.cartentia.common.Constants;
 import com.extentia.cartentia.common.CustomProgressDialog;
-import com.extentia.cartentia.common.PreferenceManager;
 import com.extentia.cartentia.models.Product;
 import com.extentia.cartentia.presenter.AddProductPresenter;
 import com.extentia.cartentia.view.activity.BaseActivity;
@@ -54,14 +53,14 @@ public class AddProductFragment extends Fragment implements AddProductView {
 
     public static AddProductFragment getInstance(String productId) {
         Bundle bundle = new Bundle();
-        bundle.putString("productId", productId);
+        bundle.putString(Constants.Keys.PRODUCTID_KEY, productId);
         AddProductFragment addProductFragment = new AddProductFragment();
         addProductFragment.setArguments(bundle);
         return addProductFragment;
     }
 
     private void initView() {
-        ((BaseActivity)getActivity()).setTitle("Added to Cart");
+        ((BaseActivity) getActivity()).setTitle(context.getString(R.string.add_to_cart));
         addProductPresenter = new AddProductPresenter(this);
         context = getActivity();
         viewcartButton = (Button) rootView.findViewById(R.id.viewcartBtn);
@@ -77,14 +76,14 @@ public class AddProductFragment extends Fragment implements AddProductView {
         productImage = (ImageView) rootView.findViewById(R.id.productImage);
         suggestionProductList = (HorizontalListView) rootView.findViewById(R.id.suggestionProductListView);
         CustomProgressDialog.startProgressDialog(getActivity());
-        addProductPresenter.fetchProduct(getArguments().getString("productId"));
+        addProductPresenter.fetchProduct(getArguments().getString(Constants.Keys.PRODUCTID_KEY));
     }
 
     @Override
     public void displayProduct(Product product) {
         if (product != null) {
-            Picasso.with(getActivity()).load(Constants.Url.IMAGE_HOST_URL + product.getProductImage().replace("/images", "images/mobile")).into(productImage);
-            SpannableString spannablecontent = new SpannableString(product.getProductName() + " "+getString(R.string.addproduct_txt));
+            Picasso.with(getActivity()).load(Constants.Url.IMAGE_HOST_URL + product.getProductImage().replace(context.getString(R.string.image_txt), context.getString(R.string.image_url_txt))).into(productImage);
+            SpannableString spannablecontent = new SpannableString(product.getProductName() + " " + getString(R.string.addproduct_txt));
             spannablecontent.setSpan(new StyleSpan(Typeface.BOLD),
                     0, product.getProductName().length(), 0);
             addCartTextView.setText(spannablecontent);
@@ -97,6 +96,6 @@ public class AddProductFragment extends Fragment implements AddProductView {
     @Override
     public void displayNoProductFoundError() {
         CustomProgressDialog.stopProgressDialog(context);
-        Toast.makeText(context, "Product not found! Please try later.", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, R.string.product_not_found, Toast.LENGTH_LONG).show();
     }
 }

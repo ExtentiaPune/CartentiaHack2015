@@ -18,10 +18,9 @@ public class CartentiaGCMListenerService extends GcmListenerService {
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String message = data.getString("Order Status");
+        String message = data.getString(getString(R.string.notification_data_key_txt));
         sendNotification(message);
     }
-    // [END receive_message]
 
     private void sendNotification(String message) {
         Intent intent = new Intent(this, LoginActivity.class);
@@ -36,7 +35,6 @@ public class CartentiaGCMListenerService extends GcmListenerService {
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
-
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notificationBuilder.build());

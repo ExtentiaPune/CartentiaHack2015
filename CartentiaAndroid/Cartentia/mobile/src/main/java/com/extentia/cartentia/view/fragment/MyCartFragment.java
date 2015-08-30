@@ -45,7 +45,7 @@ public class MyCartFragment extends Fragment implements MyCartView,
     private MyCartProductListAdapter myCartProductListAdapter;
     private Context context;
     private Button placeOrderButton;
-    private double totalAmount = 0.0;
+    private double totalAmount;
     private GoogleApiClient mGoogleApiClient;
     private Location lastLocation;
 
@@ -88,8 +88,8 @@ public class MyCartFragment extends Fragment implements MyCartView,
 
     private void showPlaceOrderConfirmationDialog() {
         new AlertDialog.Builder(context)
-                .setTitle("Place Order?")
-                .setMessage("Are you sure you want to place the order?")
+                .setTitle(context.getString(R.string.place_order_confirmation_title_txt))
+                .setMessage(context.getString(R.string.place_order_confirmation_dialog_message_txt))
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -110,8 +110,8 @@ public class MyCartFragment extends Fragment implements MyCartView,
         PlaceeOrderRequest placeeOrderRequest = new PlaceeOrderRequest();
         placeeOrderRequest.setGroupID(PreferenceManager.getGroupID());
         placeeOrderRequest.setUserID(PreferenceManager.getUserID());
-        placeeOrderRequest.setLoclatlong("12.973280,77.594982");
-        placeeOrderRequest.setStatusID("55e280f3f16422c805aaadb7");
+        placeeOrderRequest.setLoclatlong(context.getString(R.string.default_latlon_txt));
+        placeeOrderRequest.setStatusID(context.getString(R.string.order_status_txt));
         ArrayList<PlaceProduct> products = new ArrayList<>();
         for (MyCartResponse myCartResponse : cartResponses) {
             PlaceProduct product = new PlaceProduct();
@@ -146,7 +146,7 @@ public class MyCartFragment extends Fragment implements MyCartView,
 
             addProducts(cartRespons);
         } else {
-            Toast.makeText(context, "Your cart is not available! Please try later.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.cart_empty_txt, Toast.LENGTH_LONG).show();
             rootView.findViewById(R.id.totalAmt).setVisibility(View.GONE);
         }
     }
@@ -161,21 +161,21 @@ public class MyCartFragment extends Fragment implements MyCartView,
             double amount = Double.valueOf(quantity) * Double.valueOf(price);
             totalAmount = totalAmount + amount;
         }
-        ((TextView) rootView.findViewById(R.id.totalAmt)).setText("" + totalAmount + " Rs.");
+        ((TextView) rootView.findViewById(R.id.totalAmt)).setText(getString(R.string.ruppee_symbol_txt) + " " + totalAmount);
         rootView.findViewById(R.id.totalAmt).setVisibility(View.VISIBLE);
     }
 
     @Override
     public void displayCartError() {
         CustomProgressDialog.stopProgressDialog(getActivity());
-        Toast.makeText(context, "Your cart is not available! Please try later.", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, getString(R.string.cart_empty_txt), Toast.LENGTH_LONG).show();
         rootView.findViewById(R.id.totalAmt).setVisibility(View.GONE);
     }
 
     @Override
     public void displayPlaceOrderSuccess() {
         CustomProgressDialog.stopProgressDialog(getActivity());
-        Toast.makeText(context, "Your order has been placed successfully and awaiting acceptance.", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, R.string.placed_order_confirmation_txt, Toast.LENGTH_LONG).show();
         myCartProductListAdapter.setMyCartRespons(null);
         CartentiaApplication.MY_CART_PRODUCTS.clear();
         //fetchMyCart();
@@ -184,7 +184,7 @@ public class MyCartFragment extends Fragment implements MyCartView,
     @Override
     public void displayPlaceOrderError() {
         CustomProgressDialog.stopProgressDialog(getActivity());
-        Toast.makeText(context, "Please try later!", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, R.string.server_error_txt, Toast.LENGTH_LONG).show();
     }
 
     public static Fragment getInstance() {

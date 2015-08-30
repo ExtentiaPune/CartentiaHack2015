@@ -35,4 +35,16 @@
     <string name="user_role_txt">Primary</string>
     <string name="gcm_SenderId">104877605106</string>
     <string name="ruppee_symbol_txt">\u20B9</string>
+    <string name="cart_empty_txt">No products in your cart.</string>
+    <string name="placed_order_confirmation_txt">Your order has been placed successfully and awaiting acceptance.</string>
+    <string name="server_error_txt">Please try later!</string>
+    <string name="order_status_txt">55e280f3f16422c805aaadb7</string>
+    <string name="default_latlon_txt">12.973280,77.594982</string>
+    <string name="place_order_confirmation_title_txt">Place Order?</string>
+    <string name="place_order_confirmation_dialog_message_txt">Are you sure you want to place the order?</string>
+    <string name="add_to_cart">Added to Cart</string>
+    <string name="image_txt">/images</string>
+    <string name="image_url_txt">images/mobile</string>
+    <string name="product_not_found">Product not found! Please try later.</string>
+    <string name="notification_data_key_txt">Order Status</string>
 </resources>
